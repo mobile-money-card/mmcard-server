@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       response: { type: DataTypes.TEXT, allowNull: false },
     },
-    { sequelize, modelName: "card" }
+    { sequelize, modelName: "easypay_callback" }
   );
 
   return EasypayCallback;
