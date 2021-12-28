@@ -1,17 +1,17 @@
 const path = require("path");
 const { Sequelize } = require("sequelize");
 
-// const sequelize = new Sequelize(process.env.POSTGRESQL_CONNECTION_STRING, {
-//   define: { freezeTableName: true, underscored: true },
-//   logging: false,
-// });
-
-const sequelize = new Sequelize({
-  dialect: "sqlite",
-  storage: path.join(__dirname, "..", "..", "..", "development", "database.sqlite3"),
+const sequelize = new Sequelize(process.env.POSTGRESQL_CONNECTION_STRING, {
   define: { freezeTableName: true, underscored: true },
-  logging: false
+  logging: false,
 });
+
+// const sequelize = new Sequelize({
+//   dialect: "sqlite",
+//   storage: path.join(__dirname, "..", "..", "..", "development", "database.sqlite3"),
+//   define: { freezeTableName: true, underscored: true },
+//   logging: false
+// });
 
 const Admin = require("./models/admin")(sequelize, Sequelize);
 const Card = require("./models/card")(sequelize, Sequelize);
