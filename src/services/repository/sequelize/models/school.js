@@ -14,6 +14,7 @@ module.exports = (sequelize, Sequelize) => {
         type: DataTypes.ARRAY(
           DataTypes.ENUM(["Primary", "O'Level", "A'Level"])
         ),
+        allowNull: false
       },
       location: { type: DataTypes.STRING(100), allowNull: false },
     },

@@ -1,8 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
   const { DataTypes, Model } = Sequelize;
-  
-  class RegistrationAgent extends Model {}
-  RegistrationAgent.init(
+  class MMAgent extends Model {}
+  MMAgent.init(
     {
       id: {
         type: DataTypes.UUID,
@@ -11,10 +10,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       name: { type: DataTypes.STRING(100), allowNull: false },
       email: { type: DataTypes.STRING(100), allowNull: false, unique: true },
-      password: { type: DataTypes.STRING(100), allowNull: false },
+      phoneNumber: { type: DataTypes.STRING(20), allowNull: false },
+      hashedPassword: { type: DataTypes.STRING(100), allowNull: false },
     },
-    { sequelize, modelName: "registration_agent" }
+    { sequelize, modelName: "mm_agent" }
   );
 
-  return RegistrationAgent;
+  return MMAgent;
 };

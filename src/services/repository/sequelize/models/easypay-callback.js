@@ -1,20 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
   const { DataTypes, Model } = Sequelize;
 
-  class Card extends Model {}
-  Card.init(
+  class EasypayCallback extends Model {}
+  EasypayCallback.init(
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      cardNumber: { type: DataTypes.STRING(100), allowNull: false, unique: true, },
-      pin: { type: DataTypes.STRING(100), allowNull: false },
-      // student id
+      response: { type: DataTypes.TEXT, allowNull: false },
     },
     { sequelize, modelName: "card" }
   );
 
-  return Card;
+  return EasypayCallback;
 };

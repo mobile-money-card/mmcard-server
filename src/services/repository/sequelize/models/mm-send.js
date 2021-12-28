@@ -20,8 +20,9 @@ module.exports = (sequelize, Sequelize) => {
       reference: { type: DataTypes.UUID, allowNull: false, unique: true},
       serviceFee: { type: DataTypes.DECIMAL(19, 4), allowNull: false },
       status: {
-        type: DataTypes.ENUM(["pending", "success", "failed"]),
+        type: DataTypes.ENUM(["pending", "processing", "success", "failed", "terminated"]),
         allowNull: false,
+        defaultValue: "pending"
       },
       statusMessage: { type: DataTypes.STRING },
       // receiverId: {},
