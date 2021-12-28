@@ -1,7 +1,5 @@
 const express = require("express");
-const {
-  sendMobileMoneyToCard,
-} = require("../services/transactions/transactions");
+const { initiateMMSend, startMMSend } = require("../services/transactions/transactions");
 const router = express.Router();
 
 router.get("/", (_, res) => {
@@ -10,8 +8,20 @@ router.get("/", (_, res) => {
 
 router.post("/send", async (req, res) => {
   try {
-    const transaction = await sendMobileMoneyToCard(req.body);
+    const transaction = await initiateMMSend(req.body);
     res.json({ ...transaction });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.post("/start-send", async (req, res) => {
+  try {
+    const { reference } = req.body;
+    
+    startMMSend(reference);
+    // start easy pay transaction
+    res.json(null);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

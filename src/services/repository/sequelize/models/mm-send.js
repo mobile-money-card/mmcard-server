@@ -17,12 +17,19 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
       },
       reason: { type: DataTypes.STRING, allowNull: false },
-      reference: { type: DataTypes.UUID, allowNull: false, unique: true},
+      reference: { type: DataTypes.UUID, allowNull: false, unique: true },
       serviceFee: { type: DataTypes.DECIMAL(19, 4), allowNull: false },
       status: {
-        type: DataTypes.ENUM(["pending", "processing", "success", "failed", "terminated"]),
+        type: DataTypes.ENUM([
+          "pending",
+          "processing",
+          "success",
+          "failed",
+          "terminated",
+          "processed",
+        ]),
         allowNull: false,
-        defaultValue: "pending"
+        defaultValue: "pending",
       },
       statusMessage: { type: DataTypes.STRING },
       // receiverId: {},

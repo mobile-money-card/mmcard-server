@@ -21,6 +21,10 @@ module.exports = (models, sequelize) => {
     });
   }
 
+  async function getMMSendByReference(reference) {
+    return await MMSend.findOne({ where: { reference } });
+  }
+
   async function updateMMSendStatusById({ id, status }) {
     return await MMSend.update({ status }, { where: { id } });
   }
@@ -31,6 +35,7 @@ module.exports = (models, sequelize) => {
 
   return {
     addMMSend,
+    getMMSendByReference,
     updateMMSendStatusById,
     updateMMSendStatusByReference,
   };

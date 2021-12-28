@@ -16,10 +16,16 @@ async function easypayDeposit({ reference, amount, number }) {
     const response = await axios.post(process.env.EASY_PAY_ENDPOINT, {
       ...payload,
     });
-    return response.data;
+
+    if(response.data.success === 1) {
+      const {status} = response.data.data;
+      return status.toLowerCase();
+    }
+
+    return "failed";
   } catch (error) {
     if (error.response) {
-      if (error.response.status === 524) throw new Error("timeout");
+      if (error.response.status === 524) return "pending";
       throw new Error("bad request");
     } else if (error.request) {
       throw new Error("no response");
