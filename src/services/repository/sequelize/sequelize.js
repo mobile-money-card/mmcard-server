@@ -1,9 +1,11 @@
 const path = require("path");
 const { Sequelize } = require("sequelize");
+const pg = require("pg");
 
 const sequelize = new Sequelize(process.env.POSTGRESQL_CONNECTION_STRING, {
   define: { freezeTableName: true, underscored: true },
   logging: false,
+  dialectModule: pg
 });
 
 // const sequelize = new Sequelize({
