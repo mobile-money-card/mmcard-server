@@ -23,6 +23,7 @@ async function startEasyPayDeposit({ reference, amount, number }) {
     await repo.addEasypayCallback({
       response: `EASY PAY DEPOSIT INITIATE ERROR!!!\n${error.message}`,
     });
+    throw new Error(error.message);
   }
 }
 
@@ -71,7 +72,8 @@ async function startMMSend(reference) {
   const { senderNumber, amount, serviceFee } = await repo.getMMSendByReference(
     reference
   );
-  startEasyPayDeposit({
+  // where everything changed
+  await startEasyPayDeposit({
     reference,
     amount: amount + serviceFee,
     number: senderNumber,
