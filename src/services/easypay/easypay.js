@@ -27,7 +27,7 @@ async function easypayDeposit({ reference, amount, number }) {
   } catch (error) {
     console.log('easypayDeposit(): error', error.message);
     if (error.response) {
-      if (error.response.status === 524) return "pending";
+      if (error.response.status === 524) return "processing";
       throw new Error("bad request");
     } else if (error.request) {
       throw new Error("no response");

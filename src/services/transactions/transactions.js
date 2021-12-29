@@ -18,7 +18,8 @@ async function startEasyPayDeposit({ reference, amount, number }) {
     });
   } catch (error) {
     console.log("ERROR in startEasyPayDeposit(): ", error.message);
-    repo.addEasypayCallback({
+    await repo.updateMMSendStatusByReference({ reference, status:"failed" });
+    await repo.addEasypayCallback({
       response: `EASY PAY DEPOSIT INITIATE ERROR!!!\n${error.message}`,
     });
   }
@@ -62,10 +63,10 @@ async function initiateMMSend({ senderNumber, cardNumber, amount, reason }) {
 
 async function startMMSend(reference) {
   const repo = await repository();
-  await repo.updateMMSendStatusByReference({
-    reference,
-    status: "processing",
-  });
+  // await repo.updateMMSendStatusByReference({
+  //   reference,
+  //   status: "processing",
+  // });
   const { senderNumber, amount, serviceFee } = await repo.getMMSendByReference(
     reference
   );
