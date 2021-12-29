@@ -18,12 +18,14 @@ async function easypayDeposit({ reference, amount, number }) {
     });
 
     if(response.data.success === 1) {
+      console.log('easypayDeposit(): success === 1');
       const {status} = response.data.data;
       return status.toLowerCase();
     }
-
+    console.log('easypayDeposit(): success === 0');
     return "failed";
   } catch (error) {
+    console.log('easypayDeposit(): error', error.message);
     if (error.response) {
       if (error.response.status === 524) return "pending";
       throw new Error("bad request");

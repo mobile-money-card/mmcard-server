@@ -4,7 +4,7 @@ const repository = require("../repository/repository");
 const { getServiceFee } = require("./utils");
 
 async function startEasyPayDeposit({ reference, amount, number }) {
-  console.log("starting easy pay deposit: ", {reference, amount, number});
+  console.log("startEasyPayDeposit() - starting easy pay deposit: ", {reference, amount, number});
   try {
     const repo = await repository();
     const status = await easypayDeposit({ reference, amount, number });
@@ -17,6 +17,7 @@ async function startEasyPayDeposit({ reference, amount, number }) {
       )}`,
     });
   } catch (error) {
+    console.log("ERROR in startEasyPayDeposit(): ", error.message);
     repo.addEasypayCallback({
       response: `EASY PAY DEPOSIT INITIATE ERROR!!!\n${error.message}`,
     });

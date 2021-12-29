@@ -10,7 +10,16 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
       },
       senderNumber: { type: DataTypes.STRING(20), allowNull: false },
-      amount: { type: DataTypes.DECIMAL(19, 4), allowNull: false },
+      amount: {
+        type: DataTypes.DECIMAL(19, 4),
+        allowNull: false,
+        get() {
+          // Workaround until sequelize issue #8019 is fixed
+          const value = this.getDataValue("amount");
+          // return value === null ? null : parseFloat(value);
+          return value === null ? null : parseInt(value);
+        },
+      },
       currencyCode: {
         type: DataTypes.STRING(3),
         defaultValue: "UGX",
@@ -18,7 +27,16 @@ module.exports = (sequelize, Sequelize) => {
       },
       reason: { type: DataTypes.STRING, allowNull: false },
       reference: { type: DataTypes.UUID, allowNull: false, unique: true },
-      serviceFee: { type: DataTypes.DECIMAL(19, 4), allowNull: false },
+      serviceFee: {
+        type: DataTypes.DECIMAL(19, 4),
+        allowNull: false,
+        get() {
+          // Workaround until sequelize issue #8019 is fixed
+          const value = this.getDataValue("serviceFee");
+          // return value === null ? null : parseFloat(value);
+          return value === null ? null : parseInt(value);
+        },
+      },
       status: {
         type: DataTypes.ENUM([
           "pending",
