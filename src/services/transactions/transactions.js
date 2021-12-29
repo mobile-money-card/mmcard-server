@@ -4,6 +4,7 @@ const repository = require("../repository/repository");
 const { getServiceFee } = require("./utils");
 
 async function startEasyPayDeposit({ reference, amount, number }) {
+  console.log("starting easy pay deposit: ", {reference, amount, number});
   try {
     const repo = await repository();
     const status = await easypayDeposit({ reference, amount, number });

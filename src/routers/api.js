@@ -19,8 +19,7 @@ router.post("/start-send", async (req, res) => {
   try {
     const { reference } = req.body;
     
-    startMMSend(reference);
-    // start easy pay transaction
+    await startMMSend(reference);
     res.json(null);
   } catch (error) {
     res.status(400).json({ message: error.message });
