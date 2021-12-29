@@ -16,6 +16,7 @@ async function startEasyPayDeposit({ reference, amount, number }) {
         status
       )}`,
     });
+    console.log("startEasyPayDeposit() - finished: ", status);
   } catch (error) {
     console.log("ERROR in startEasyPayDeposit(): ", error.message);
     await repo.updateMMSendStatusByReference({ reference, status:"failed" });
