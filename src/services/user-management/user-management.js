@@ -67,6 +67,9 @@ async function createStudentAccount(studentData) {
   if(!card){
     throw new Error("card is not in the database");
   }
+  if(card.student) {
+    throw new Error("this card has an owner");
+  }
   return await repo.addStudent({name, schoolId, cardId: card.id});
 }
 

@@ -65,10 +65,10 @@ async function initiateMMSend({ senderNumber, cardNumber, amount, reason }) {
 
 async function startMMSend(reference) {
   const repo = await repository();
-  // await repo.updateMMSendStatusByReference({
-  //   reference,
-  //   status: "processing",
-  // });
+  await repo.updateMMSendStatusByReference({
+    reference,
+    status: "processing",
+  });
   const { senderNumber, amount, serviceFee } = await repo.getMMSendByReference(
     reference
   );
