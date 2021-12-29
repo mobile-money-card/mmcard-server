@@ -9,9 +9,13 @@ router.get("/", (_, res) => {
 router.post("/", async (req, res) => {
   try {
     const repo = await repository();
+    console.log("EASY PAY HAS CALLED BACK: ", req.body);
     if (req.body.success === 1) {
       const { status, reference } = req.body.data;
-      await repo.updateMMSendStatusByReference({ reference, status });
+      await repo.updateMMSendStatusByReference({
+        reference,
+        status: status.toLowerCase(),
+      });
     }
     await repo.addEasypayCallback({
       response: `EASY PAY CALLBACK\n ${JSON.stringify(req.body)}`,
